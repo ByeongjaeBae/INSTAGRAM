@@ -1,0 +1,25 @@
+footer {
+  margin-top: 2em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3em;
+}
+.footer_column1 {
+  width: 50em;
+  display: flex;
+  padding-right: 0.4em;
+  font-size: 11px;
+  opacity: 0.5;
+  margin-bottom: 1em;
+  justify-content: space-between;
+}
+.footer_column2 {
+  width: 25em;
+  display: flex;
+  justify-content: space-around;
+  opacity: 0.5;
+  font-size: 11px;
+}

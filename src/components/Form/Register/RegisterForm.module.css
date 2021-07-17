@@ -1,7 +1,8 @@
-section {
+.section {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  padding-top: 4em;
 }
 .formContainer,
 .search {
@@ -30,24 +31,26 @@ section {
 .column_2 {
   width: 350px;
 }
-.input_1,
-.input_2 {
+.input {
   margin-bottom: 7px;
   font-size: 13px;
   width: 80%;
-  height: 27px;
+  height: 35px;
   padding: 4px;
   background-color: #fafafa;
   border: 0.2px solid rgba(0, 0, 0, 0.2);
   border-radius: 3px;
 }
-.input_1:focus,
-.input_2:focus {
+.input:focus {
   outline: 0;
   border: 1px solid rgba(0, 0, 0, 0.4);
 }
+.input::placeholder {
+  opacity: 0.8;
+  font-size: 13px;
+}
 .login {
-  margin-top: 10px;
+  margin: 10px 0px;
   width: 83%;
   padding: 4px;
   background-color: #b2dffc;
@@ -77,21 +80,28 @@ section {
   font-weight: 600;
 }
 .naverBtn {
+  width: 83%;
   display: flex;
-  border: none;
+  align-items: center;
   background-color: inherit;
-  padding-bottom: 10px;
+  border: 1px solid rgb(25, 206, 96);
+  border-radius: 5px;
 }
 .naverBtn:hover {
   cursor: pointer;
 }
 .logo {
+  margin: 0;
+  padding: 0;
   padding-right: 8px;
+  color: white;
+  width: 50px;
+  margin-right: 10px;
 }
 .naver {
-  color: #385185;
-  font-weight: 600;
-  font-size: 14px;
+  color: rgb(26, 182, 2);
+  font-weight: bolder;
+  font-size: 16px;
 }
 .searchPw {
   margin-bottom: 10px;
@@ -102,6 +112,7 @@ section {
   font-weight: 530;
 }
 .search {
+  height: 63px;
   width: 350px;
   margin-top: 10px;
   display: flex;
@@ -119,4 +130,8 @@ section {
   text-decoration: none;
   font-weight: 600;
   color: rgb(82, 149, 246);
+}
+
+.footer {
+  overflow: auto;
 }

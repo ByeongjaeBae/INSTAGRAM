@@ -1,9 +1,6 @@
 import { combineReducers } from 'redux';
-import form from './form';
 
-const rootReducer = combineReducers({
-  form,
-});
+const rootReducer = combineReducers({});
 
 export default rootReducer;
 

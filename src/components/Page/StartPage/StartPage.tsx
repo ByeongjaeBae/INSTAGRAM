@@ -37,7 +37,7 @@ const StartPage = () => {
     }, 3000);
   }, []);
   return (
-    <section>
+    <section className={styles.section}>
       <article className={styles.container}>
         <div className={styles.column_1}>
           <div className={styles.imgContainer}>

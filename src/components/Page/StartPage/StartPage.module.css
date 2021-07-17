@@ -1,3 +1,8 @@
+.section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 .img {
   position: absolute;
   top: 98px;
@@ -52,6 +57,7 @@
   padding-bottom: 40px;
 }
 .container {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,4 +65,9 @@
 }
 .column_2 {
   width: 350px;
+}
+@media (max-width: 875px) {
+  .column_1 {
+    display: none;
+  }
 }

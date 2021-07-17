@@ -5,16 +5,16 @@ const Footer = () => {
   return (
     <footer>
       <div className={styles.footer_column1}>
-        <div>소개</div>
-        <div>블로그</div>
-        <div>채용정보</div>
-        <div>도움말</div>
-        <div>API</div>
-        <div>개인정보처리방침</div>
-        <div>약관</div>
-        <div>인기 계정</div>
-        <div>해시태그</div>
-        <div>위치</div>
+        <div className={styles.div}>소개</div>
+        <div className={styles.div}>블로그</div>
+        <div className={styles.div}>채용정보</div>
+        <div className={styles.div}>도움말</div>
+        <div className={styles.div}>API</div>
+        <div className={styles.div}>개인정보처리방침</div>
+        <div className={styles.div}>약관</div>
+        <div className={styles.div}>인기 계정</div>
+        <div className={styles.div}>해시태그</div>
+        <div className={styles.div}>위치</div>
       </div>
       <div className={styles.footer_column2}>
         <div>한국어</div>

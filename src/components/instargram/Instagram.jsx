@@ -1,8 +1,11 @@
 import React from 'react';
+import styles from './Instagram.module.css';
+import Header from '../header/header';
 
-const Instagram = () => {
-	const va = 1;
-	return <div>Instagram{va}</div>;
-};
+const Instagram = () => (
+  <div className={styles.container}>
+    <Header />
+  </div>
+);
 
 export default Instagram;

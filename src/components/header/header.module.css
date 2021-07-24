@@ -1,0 +1,39 @@
+.header {
+  background-color: white;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 5px 0px;
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+.container {
+  max-width: 957px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.title {
+  font-size: 25px;
+  font-family: 'Times New Roman', Times, serif;
+}
+.searchBar {
+  width: 208px;
+  cursor: text;
+  position: relative;
+}
+.search {
+  width: 100%;
+  height: 28px;
+}
+.searchDiv {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}

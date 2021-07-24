@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Login from '../../../containers/auth/Login';
 import Footer from '../../Footer/Footer';
-import LoginForm from '../../Form/Login/LoginForm';
 import styles from './LoginPage.module.css';
 
-const LoginPage = () => {
-  return (
-    <section>
-      <div className={styles.column_2}>
-        <LoginForm></LoginForm>
-      </div>
-      <Footer></Footer>
-    </section>
-  );
-};
+const LoginPage = () => (
+	<section className={styles.section}>
+		<article className={styles.container}>
+			<Login />
+		</article>
+		<Footer />
+	</section>
+);
 
 export default LoginPage;

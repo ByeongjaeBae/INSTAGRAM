@@ -1,137 +1,139 @@
 .section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 4em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 4em;
 }
 .formContainer,
 .search {
-  background-color: #ffffff;
-  border: 0.2px solid rgba(0, 0, 0, 0.2);
-  padding: 10px;
+	background-color: #ffffff;
+	border: 0.2px solid rgba(0, 0, 0, 0.2);
+	padding: 10px;
 }
 .formContainer {
-  width: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	width: 350px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 .form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 .font {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 45px;
-  padding-top: 10px;
-  padding-bottom: 40px;
+	font-family: 'Times New Roman', Times, serif;
+	font-size: 45px;
+	padding-top: 10px;
+	padding-bottom: 40px;
 }
 .column_2 {
-  width: 350px;
+	width: 350px;
 }
 .input {
-  margin-bottom: 7px;
-  font-size: 13px;
-  width: 80%;
-  height: 35px;
-  padding: 4px;
-  background-color: #fafafa;
-  border: 0.2px solid rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
+	margin-bottom: 7px;
+	font-size: 13px;
+	width: 80%;
+	height: 35px;
+	padding: 4px;
+	background-color: #fafafa;
+	border: 0.2px solid rgba(0, 0, 0, 0.2);
+	border-radius: 3px;
 }
 .input:focus {
-  outline: 0;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+	outline: 0;
+	border: 1px solid rgba(0, 0, 0, 0.4);
 }
 .input::placeholder {
-  opacity: 0.8;
-  font-size: 13px;
+	opacity: 0.8;
+	font-size: 13px;
+}
+.passwordCheck {
+	color: red;
+	padding: 3px;
+	font-weight: 600;
+	font-size: 14px;
 }
 .login {
-  margin: 10px 0px;
-  width: 83%;
-  padding: 4px;
-  background-color: #b2dffc;
-  border: 0.2px solid rgba(0, 0, 0, 0.2);
-  color: white;
-  font-weight: 600;
-  height: 30px;
-  border-radius: 5px;
-  font-size: 15px;
+	margin: 10px 0px;
+	width: 83%;
+	padding: 4px;
+	background-color: #b2dffc;
+	border: 0.2px solid rgba(0, 0, 0, 0.2);
+	color: white;
+	font-weight: 600;
+	height: 30px;
+	border-radius: 5px;
+	font-size: 15px;
 }
 .orContainer {
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 20px;
-  font-size: 13px;
-  color: rgb(83, 83, 82);
-  display: flex;
-  justify-content: space-evenly;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	font-size: 13px;
+	color: rgb(83, 83, 82);
+	display: flex;
+	justify-content: space-evenly;
 }
 .leftLine,
 .rightLine {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  width: 95px;
-  height: 8px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	width: 95px;
+	height: 8px;
 }
 .orFont {
-  font-weight: 600;
+	font-weight: 600;
 }
 .naverBtn {
-  width: 83%;
-  display: flex;
-  align-items: center;
-  background-color: inherit;
-  border: 1px solid rgb(25, 206, 96);
-  border-radius: 5px;
+	width: 83%;
+	display: flex;
+	align-items: center;
+	background-color: inherit;
+	border: 1px solid rgb(25, 206, 96);
+	border-radius: 5px;
 }
 .naverBtn:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 .logo {
-  margin: 0;
-  padding: 0;
-  padding-right: 8px;
-  color: white;
-  width: 50px;
-  margin-right: 10px;
+	margin: 0;
+	padding: 0;
+	padding-right: 8px;
+	color: white;
+	width: 50px;
+	margin-right: 10px;
 }
 .naver {
-  color: rgb(26, 182, 2);
-  font-weight: bolder;
-  font-size: 16px;
+	color: rgb(26, 182, 2);
+	font-weight: bolder;
+	font-size: 16px;
 }
 .searchPw {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 .searchPw a {
-  font-size: 13px;
-  text-decoration: none;
-  font-weight: 530;
+	font-size: 13px;
+	text-decoration: none;
+	font-weight: 530;
 }
 .search {
-  height: 63px;
-  width: 350px;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+	height: 63px;
+	width: 350px;
+	margin-top: 10px;
+	display: flex;
+	justify-content: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 .searchContainer {
-  display: flex;
+	display: flex;
 }
 .searchSpan {
-  padding-right: 3px;
+	padding-right: 3px;
 }
 .searchLink a {
-  text-decoration: none;
-  font-weight: 600;
-  color: rgb(82, 149, 246);
-}
-
-.footer {
-  overflow: auto;
+	text-decoration: none;
+	font-weight: 600;
+	color: rgb(82, 149, 246);
 }

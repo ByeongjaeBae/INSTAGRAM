@@ -1,1 +1,24 @@
-
+.container {
+	padding-top: 75px;
+}
+.article {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.contentContainer {
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	max-width: 957px;
+}
+.feedContainer {
+	max-width: 614px;
+	width: 100%;
+	background-color: blue;
+}
+@media (max-width: 1000px) {
+	.UserBarContainer {
+		display: none;
+	}
+}

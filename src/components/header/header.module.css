@@ -1,4 +1,5 @@
 .header {
+	z-index: 9999;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -7,7 +8,7 @@
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	padding: 10px 0px;
+	padding: 5px 0px;
 	border-top: 1px solid rgba(0, 0, 0, 0.2);
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
@@ -16,10 +17,15 @@
 	width: 90%;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 .title {
-	font-size: 25px;
-	font-family: 'Times New Roman', Times, serif;
+	font-size: 35px;
+	font-family: 'billabong';
+}
+@font-face {
+	font-family: 'billabong';
+	src: url(billabong.ttf);
 }
 .searchBar {
 	height: 28px;

@@ -1,38 +1,43 @@
 .loading {
-	position: absolute;
-	z-index: 9999;
-	height: 100vh;
-	width: 100vw;
-	background-color: rgb(250, 250, 250);
-	top: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  position: absolute;
+  z-index: 9999;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(250, 250, 250);
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .logo {
-	width: 60px;
-	height: 60px;
+  width: 60px;
+  height: 60px;
 }
 .container {
-	padding-top: 75px;
-	z-index: 1;
+  padding-top: 75px;
+  z-index: 1;
+  background-color: rgb(250, 250, 250);
 }
 .article {
-	width: 100%;
-	display: flex;
-	justify-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .contentContainer {
-	width: 90%;
-	max-width: 957px;
-	position: relative;
+  width: 90%;
+  max-width: 957px;
+  position: relative;
 }
 .feedContainer {
-	max-width: 614px;
-	width: 100%;
+  max-width: 614px;
+  width: 100%;
 }
 @media (max-width: 1000px) {
-	.UserBarContainer {
-		display: none;
-	}
+  .UserBarContainer {
+    display: none;
+  }
+  .contentContainer {
+    display: flex;
+    justify-content: center;
+  }
 }

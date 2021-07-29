@@ -23,10 +23,12 @@ const Instagram = () => {
 			<Header />
 			<article className={styles.article}>
 				<div ref={containerRef} className={`${styles.contentContainer} box`}>
-					<div className={styles.feedContainer}>
-						<RecommendBar />
-						<FeedList />
-					</div>
+					{!loading && (
+						<div className={styles.feedContainer}>
+							<RecommendBar />
+							<FeedList />
+						</div>
+					)}
 					<div className={styles.UserBarContainer}>
 						<UserBar size={size} />
 					</div>

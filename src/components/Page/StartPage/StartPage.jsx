@@ -41,11 +41,12 @@ const StartPage = () => {
 		if (num > 3) num = 1;
 		else num += 1;
 		setImg(num);
-		setInterval(() => {
+		const interval = setInterval(() => {
 			if (num > 3) num = 1;
 			else num += 1;
 			setImg(num);
 		}, 3000);
+		return () => clearInterval(interval);
 	}, [setImg]);
 	return (
 		<section className={styles.section}>

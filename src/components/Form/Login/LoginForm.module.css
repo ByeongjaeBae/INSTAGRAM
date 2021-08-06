@@ -89,9 +89,9 @@
 	width: 83%;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	background-color: inherit;
-	border: 1px solid rgb(25, 206, 96);
-	border-radius: 5px;
+	border: none;
 }
 .naverBtn:hover {
 	cursor: pointer;
@@ -99,30 +99,32 @@
 .logo {
 	margin: 0;
 	padding: 0;
-	padding-right: 8px;
 	color: white;
-	width: 50px;
+	width: 23px;
 	margin-right: 10px;
 }
-.naver {
-	color: rgb(26, 182, 2);
+.facebook {
+	color: rgb(146, 81, 133);
 	font-weight: bolder;
-	font-size: 16px;
+	font-size: 14px;
 }
 .searchPw {
+	margin-top: 10px;
 	padding: 10px 0px;
+	font-size: 12px;
 }
 .searchPw a {
-	font-size: 13px;
 	text-decoration: none;
 	font-weight: 530;
 }
 .search {
+	font-size: 14px;
 	height: 63px;
 	width: 350px;
 	margin-top: 10px;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }

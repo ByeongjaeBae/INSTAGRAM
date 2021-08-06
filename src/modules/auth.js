@@ -1,4 +1,5 @@
-import { userFind, userRegister } from '../service/auth';
+import authService from '../service/auth';
+import firebaseApp from '../service/firebase';
 
 /* eslint-disable no-unused-vars */
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
@@ -8,15 +9,36 @@ const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
 const REGISTER_FAILURE = 'auth/REGISTER_FAILURE';
 const LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
 
-const RegisterCheck = (user) => {
-	if (userRegister(user)) return REGISTER_SUCCESS;
-	return REGISTER_FAILURE;
-};
+const RegisterCheck = async (user) =>
+	// eslint-disable-next-line no-async-promise-executor
+	new Promise(async (resolve, reject) => {
+		try {
+			const promise = await authService.emailRegister(user);
+			const data = {
+				username: promise.username,
+				nickname: promise.nickname,
+			};
+			if (promise) {
+				await firebaseApp.database().ref(`userId/${promise.uid}`).set(data);
+				resolve(REGISTER_SUCCESS);
+			}
+		} catch (e) {
+			reject(e);
+		}
+	});
 
-const LoginCheck = (user) => {
-	if (userFind(user)) return LOGIN_SUCCESS;
-	return LOGIN_FAILURE;
-};
+const LoginCheck = async (user) =>
+	// eslint-disable-next-line no-async-promise-executor
+	new Promise(async (resolve, reject) => {
+		try {
+			const promise = await authService.emailLogin(user);
+			if (promise) {
+				resolve(promise);
+			}
+		} catch (e) {
+			reject(e);
+		}
+	});
 
 export const changeField = ({ form, key, value }) => ({
 	type: CHANGE_FIELD,
@@ -32,47 +54,65 @@ export const initializeForm = (form) => ({
 	data: form,
 });
 
-export const register = ({ email, username, nickname, password }) => {
-	const data = {
-		email,
-		username,
-		nickname,
-		password,
+export const register = () =>
+	async function Fn(dispatch, getState) {
+		try {
+			const data = { ...getState().Auth.register };
+			const type = await RegisterCheck(data);
+			if (type === REGISTER_SUCCESS) {
+				return dispatch({
+					type,
+					data,
+					auth: true,
+				});
+			}
+		} catch (e) {
+			console.error(e);
+			return dispatch({
+				type: REGISTER_FAILURE,
+				error: 'Register Error',
+				auth: false,
+			});
+		}
 	};
-	const type = RegisterCheck(data);
-	if (type === REGISTER_SUCCESS) {
-		return {
-			type,
-			data,
-			auth: true,
-		};
-	}
-	return {
-		type,
-		error: 'Register Error',
-		auth: false,
-	};
-};
 
-export const login = ({ email, password }) => {
-	const data = {
-		email,
-		password,
+export const login = () =>
+	async function Fn(dispatch, getState) {
+		try {
+			const data = { ...getState().Auth.login };
+			const user = await LoginCheck(data);
+			return dispatch({
+				typeL: LOGIN_SUCCESS,
+				user,
+				auth: true,
+			});
+		} catch (e) {
+			console.error(e);
+			return dispatch({
+				type: LOGIN_FAILURE,
+				error: 'Login Error',
+				auth: false,
+			});
+		}
 	};
-	const type = LoginCheck(data);
-	if (type === LOGIN_SUCCESS) {
-		return {
-			type,
-			data,
-			auth: true,
-		};
-	}
-	return {
-		type,
-		error: 'Login Error',
-		auth: false,
+
+export const facebookLogin = () =>
+	async function Fn(dispatch) {
+		try {
+			const user = await authService.facebookLogin();
+			return dispatch({
+				type: LOGIN_SUCCESS,
+				auth: true,
+				user,
+			});
+		} catch (e) {
+			console.error(e);
+			return dispatch({
+				type: LOGIN_FAILURE,
+				auth: false,
+			});
+		}
 	};
-};
 const initialState = {
 	register: {
 		email: '',
@@ -85,22 +125,14 @@ const initialState = {
 		email: '',
 		password: '',
 	},
-	registerData: {
-		email: '',
-		username: '',
-		nickname: '',
-		password: '',
-	},
-	loginData: {
-		email: '',
-		password: '',
-	},
+	nickname: '',
+	username: '',
 	auth: null,
 	authError: null,
 };
 
 function Auth(state = initialState, action) {
-	const { type, data, auth, error } = action;
+	const { type, data, auth, error, user } = action;
 	switch (type) {
 		case CHANGE_FIELD: {
 			const obj = { ...state[data.form] };
@@ -115,15 +147,14 @@ function Auth(state = initialState, action) {
 				...state,
 				[data.form]: initialState[data.form],
 				authError: null,
-				registerData: initialState.registerData,
-				loginData: initialState.loginData,
 			};
 		}
 		case REGISTER_SUCCESS: {
 			return {
 				...state,
 				authError: null,
-				registerData: data,
+				nickname: data.nickname,
+				username: data.username,
 				auth,
 			};
 		}
@@ -138,7 +169,8 @@ function Auth(state = initialState, action) {
 			return {
 				...state,
 				authError: null,
-				loginData: data,
+				nickname: user.nickname,
+				username: user.username,
 				auth,
 			};
 		}

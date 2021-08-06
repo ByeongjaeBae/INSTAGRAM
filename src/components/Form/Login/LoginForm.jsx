@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from './LoginForm.module.css';
 
 const LoginForm = (props) => {
-	const { error, form, onSubmit, onChange } = props;
+	const { error, form, onLogin, onSubmit, onChange } = props;
 	return (
 		<section className={styles.section}>
 			<article className={styles.article}>
@@ -37,13 +37,13 @@ const LoginForm = (props) => {
 						<div className={styles.orFont}>또는</div>
 						<div className={styles.rightLine} />
 					</div>
-					<button type='button' className={styles.naverBtn}>
+					<button onClick={onLogin} type='button' className={styles.naverBtn}>
 						<img
 							alt='name'
 							className={styles.logo}
-							src='https://www.google.com/s2/favicons?domain_url=http://www.naver.com'
+							src='/pictures/facebook.png'
 						/>
-						<span className={styles.naver}>Naver로 로그인하기</span>
+						<span className={styles.facebook}>Facebook으로 로그인하기</span>
 					</button>
 					<div className={styles.searchPw}>비밀번호를 잊으셨나요?</div>
 				</div>
@@ -64,6 +64,7 @@ const LoginForm = (props) => {
 
 LoginForm.propTypes = {
 	form: PropTypes.objectOf(PropTypes.string).isRequired,
+	onLogin: PropTypes.func.isRequired,
 	onSubmit: PropTypes.func.isRequired,
 	onChange: PropTypes.func.isRequired,
 	error: PropTypes.string,

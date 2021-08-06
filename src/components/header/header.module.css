@@ -97,6 +97,54 @@
 .userIcon {
 	margin-left: 20px;
 }
+.userIcon {
+	position: relative;
+}
+.button {
+	position: relative;
+}
+.menuCon {
+	position: absolute;
+	top: 40px;
+}
+.rhombus {
+	transform: rotate(45deg);
+	height: 14px;
+	width: 14px;
+	background-color: white;
+	box-shadow: 0 0 5px 1px rgb(0 0 0 / 10%);
+	z-index: -1;
+	position: absolute;
+	left: 25px;
+	top: -5px;
+}
+.menu {
+	width: 100px;
+	background-color: white;
+	position: relative;
+	border: none;
+}
+.menubar {
+	width: 100%;
+	position: absolute;
+	background-color: white;
+	z-index: 2;
+	border: 0.5px solid rgba(0, 0, 0, 0.2);
+	right: 50px;
+	top: 2px;
+	font-size: 14px;
+	font-weight: 500;
+}
+.post {
+	margin-top: 3px;
+}
+.menubar button {
+	background-color: inherit;
+	border: none;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	cursor: pointer;
+}
 @media (max-width: 500px) {
 	.searchBar {
 		display: none;

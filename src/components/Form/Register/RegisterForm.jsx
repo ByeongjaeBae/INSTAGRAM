@@ -3,14 +3,18 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import styles from './RegisterForm.module.css';
 
-const RegisterForm = ({ onChange, form, onSubmit, error }) => (
+const RegisterForm = ({ onChange, form, onSubmit, error, onLogin }) => (
 	<section className={styles.section}>
 		<article className={styles.article}>
 			<div className={styles.formContainer}>
 				<h1 className={styles.font}>Instagram</h1>
-				<button type='button' className={styles.naverBtn}>
-					<img className={styles.logo} src='/pictures/naver.png' alt='name' />
-					<span className={styles.naver}>네이버 아이디로 가입</span>
+				<button onClick={onLogin} type='button' className={styles.naverBtn}>
+					<img
+						className={styles.logo}
+						src='/pictures/facebook.png'
+						alt='name'
+					/>
+					<span className={styles.facebook}>Facebook 아이디로 로그인</span>
 				</button>
 				<div className={styles.orContainer}>
 					<div className={styles.leftLine} />
@@ -82,6 +86,7 @@ RegisterForm.propTypes = {
 	form: PropTypes.objectOf(PropTypes.string).isRequired,
 	onSubmit: PropTypes.func.isRequired,
 	onChange: PropTypes.func.isRequired,
+	onLogin: PropTypes.func.isRequired,
 	error: PropTypes.string,
 };
 RegisterForm.defaultProps = {

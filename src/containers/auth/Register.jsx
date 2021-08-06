@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
@@ -5,8 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import RegisterForm from '../../components/Form/Register/RegisterForm';
-import { changeField, initializeForm, register } from '../../modules/auth';
-import { check, setTempUser } from '../../modules/user';
+import {
+	changeField,
+	facebookLogin,
+	initializeForm,
+	register,
+} from '../../modules/auth';
+import authService from '../../service/auth';
 
 const Register = ({ history }) => {
 	const [error, setError] = useState(null);
@@ -27,6 +33,9 @@ const Register = ({ history }) => {
 			}),
 		);
 	};
+	const onLogin = () => {
+		dispatch(facebookLogin());
+	};
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const { email, username, password, passwordConfirm, nickname } = form;
@@ -39,7 +48,18 @@ const Register = ({ history }) => {
 			// eslint-disable-next-line no-useless-return
 			return;
 		}
-		dispatch(register({ email, username, nickname, password }));
+		if (password.length < 7) {
+			setError('비밀번호는 6글자보다 길어야 합니다.');
+			return;
+		}
+		authService
+			.checkNickname(nickname)
+			.then(() => {
+				dispatch(register());
+			})
+			.catch(() => {
+				setError('동일한 닉네임이 존재합니다');
+			});
 	};
 	useEffect(() => {
 		dispatch(initializeForm('register'));
@@ -50,20 +70,15 @@ const Register = ({ history }) => {
 			return;
 		}
 		if (auth) {
-			dispatch(setTempUser('register', form.username));
-			dispatch(check());
-		}
-	}, [auth, authError, dispatch]);
-
-	useEffect(() => {
-		if (user) {
 			history.push('/instagram');
 		}
-	}, [history, user]);
+	}, [auth, authError, dispatch, history]);
+
 	return (
 		<RegisterForm
 			error={error}
 			onChange={onChange}
+			onLoign={onLogin}
 			onSubmit={onSubmit}
 			form={form}
 		/>

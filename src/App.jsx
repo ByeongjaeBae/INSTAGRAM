@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -6,22 +7,22 @@ import LoginPage from './components/Page/LoginPage/LoginPage';
 import RegisterPage from './components/Page/RegisterPage/RegisterPage';
 import Instagram from './components/instargram/Instagram';
 
-function App() {
+function App({ authService }) {
 	return (
 		<div className='App'>
 			<BrowserRouter>
 				<Switch>
 					<Route exact path='/'>
-						<StartPage />
+						<StartPage authService={authService} />
 					</Route>
 					<Route path='/accounts/login'>
-						<LoginPage />
+						<LoginPage authService={authService} />
 					</Route>
 					<Route path='/accounts/signup'>
-						<RegisterPage />
+						<RegisterPage authService={authService} />
 					</Route>
 					<Route path='/instagram'>
-						<Instagram />
+						<Instagram authService={authService} />
 					</Route>
 				</Switch>
 			</BrowserRouter>

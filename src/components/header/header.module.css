@@ -125,6 +125,9 @@
 	border: none;
 }
 .menubar {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
 	width: 100%;
 	position: absolute;
 	background-color: white;
@@ -135,6 +138,9 @@
 	font-size: 14px;
 	font-weight: 500;
 }
+.menubar button {
+	width: 100%;
+}
 .post {
 	margin-top: 3px;
 }
@@ -142,7 +148,6 @@
 	background-color: inherit;
 	border: none;
 	margin-bottom: 5px;
-	margin-left: 5px;
 	cursor: pointer;
 }
 @media (max-width: 500px) {

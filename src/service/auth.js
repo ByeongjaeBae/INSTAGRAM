@@ -43,13 +43,23 @@ class AuthService {
 		});
 	}
 
-	checkNickname(nickname) {
+	checkUser(nickname) {
 		return new Promise(async (resolve, reject) => {
 			const ref = await firebaseApp.database().ref(`nickname/${nickname}`);
 			ref.on('value', (snapshot) => {
 				const data = snapshot.val();
-				data ?? resolve(nickname);
+				data ?? resolve(data);
 				reject(new Error('nickname is already exists'));
+			});
+		});
+	}
+	checkNickname(userId) {
+		return new Promise(async (resolve, reject) => {
+			const ref = await firebaseApp.database().ref(`userId/${userId}`);
+			ref.on('value', (snapshot) => {
+				const data = snapshot.val();
+				data ?? resolve(data);
+				reject(new Error('User is not exists'));
 			});
 		});
 	}
@@ -73,17 +83,19 @@ class AuthService {
 						};
 						value && resolve(dbData);
 						firebaseApp.database().ref(`userId/${data.user.uid}`).set(dbData);
+						firebaseApp.database().ref(`nickname/${displayName}`).set(dbData);
+						resolve(dbData);
 					});
 				})
 				.catch((e) => reject(e));
 		});
 	}
 	logout() {
-		firebase.auth().signOut();
+		firebaseApp.auth().signOut();
 	}
-	onAuthChange(onUserChanged) {
-		firebase.auth().onAuthStateChanged((user) => {
-			onUserChanged(user);
+	onAuthChange(onAuthChange) {
+		firebaseApp.auth().onAuthStateChanged((user) => {
+			onAuthChange(user);
 		});
 	}
 }

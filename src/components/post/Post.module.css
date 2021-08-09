@@ -1,0 +1,25 @@
+.form {
+	z-index: 9999;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	height: 300px;
+	max-height: 500px;
+	width: 400px;
+	border-radius: 10px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+}
+.image {
+	display: none;
+}
+.button {
+	height: 100px;
+}
+.text {
+	resize: none;
+	border: none;
+}
+.text:focus {
+	border: none;
+	outline: none;
+}

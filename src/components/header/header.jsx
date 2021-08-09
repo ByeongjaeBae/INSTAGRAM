@@ -1,8 +1,9 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, memo } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './header.module.css';
 
-const Header = () => {
+const Header = memo(({ onLogout, onPost }) => {
 	const inputRef = useRef();
 	const [focus, setFocus] = useState(false);
 	const [toggle, setToggle] = useState(false);
@@ -88,10 +89,16 @@ const Header = () => {
 								<div className={styles.menu}>
 									<div className={styles.rhombus} />
 									<div className={styles.menubar}>
-										<button type='button' className={styles.post}>
+										<button
+											onClick={onPost}
+											type='button'
+											className={styles.post}
+										>
 											포스트 작성
 										</button>
-										<button type='button'>로그아웃</button>
+										<button onClick={onLogout} type='button'>
+											로그아웃
+										</button>
 									</div>
 								</div>
 							</div>
@@ -101,6 +108,11 @@ const Header = () => {
 			</div>
 		</header>
 	);
+});
+
+Header.propTypes = {
+	onLogout: PropTypes.func.isRequired,
+	onPost: PropTypes.func.isRequired,
 };
 
 export default Header;

@@ -20,6 +20,10 @@ const RegisterCheck = async (user) =>
 			};
 			if (promise) {
 				await firebaseApp.database().ref(`userId/${promise.uid}`).set(data);
+				await firebaseApp
+					.database()
+					.ref(`nickname/${data.nickname}`)
+					.set(data.nickname);
 				resolve(REGISTER_SUCCESS);
 			}
 		} catch (e) {
@@ -113,6 +117,26 @@ export const facebookLogin = () =>
 			});
 		}
 	};
+
+export const checkUser = (userId) => {
+	async function Fn(dispatch) {
+		try {
+			const user = await authService.checkNickname(userId);
+			return dispatch({
+				type: LOGIN_SUCCESS,
+				auth: true,
+				user,
+			});
+		} catch (e) {
+			console.error(e);
+			return dispatch({
+				type: LOGIN_FAILURE,
+				auth: false,
+			});
+		}
+	}
+};
+
 const initialState = {
 	register: {
 		email: '',
@@ -146,6 +170,7 @@ function Auth(state = initialState, action) {
 			return {
 				...state,
 				[data.form]: initialState[data.form],
+				auth: null,
 				authError: null,
 			};
 		}

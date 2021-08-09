@@ -4,7 +4,7 @@ import styles from './FeedList.module.css';
 
 const FeedList = () => (
 	<div className={styles.container}>
-		<Feed />
+		<Feed key={Date.now()} />
 	</div>
 );
 

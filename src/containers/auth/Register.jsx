@@ -17,11 +17,10 @@ import authService from '../../service/auth';
 const Register = ({ history }) => {
 	const [error, setError] = useState(null);
 	const dispatch = useDispatch();
-	const { form, auth, authError, user } = useSelector((state) => ({
+	const { form, auth, authError } = useSelector((state) => ({
 		form: state.Auth.register,
 		auth: state.Auth.auth,
 		authError: state.Auth.authError,
-		user: state.User.user,
 	}));
 	const onChange = (e) => {
 		const { value, name } = e.target;
@@ -53,7 +52,7 @@ const Register = ({ history }) => {
 			return;
 		}
 		authService
-			.checkNickname(nickname)
+			.checkUser(nickname)
 			.then(() => {
 				dispatch(register());
 			})
@@ -66,7 +65,7 @@ const Register = ({ history }) => {
 	}, [dispatch]);
 	useEffect(() => {
 		if (authError) {
-			setError('이미 존재하는 게정명입니다.');
+			setError('회원가입 오류입니다.');
 			return;
 		}
 		if (auth) {

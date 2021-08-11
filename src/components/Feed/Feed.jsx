@@ -1,11 +1,21 @@
-import React, { useState, useRef } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState, useRef, useEffect } from 'react';
 import BlueDot from '../blue_dot/blue_dot';
 
 import styles from './Feed.module.css';
 
-let index = 0;
-const pictures = 2;
-const Feed = () => {
+function date(time) {
+	const data = (Date.now() - time) * 2.7777777777778e-7;
+	const day = data / 24;
+	if (data < 24) {
+		return '오늘';
+	}
+	return `${day}일전`;
+}
+
+const Feed = ({ data }) => {
+	const { imgArr, nickname, text, time } = data;
+	const pictures = imgArr.length;
 	const arr = Array.from({ length: pictures }, (v, i) => i);
 	const [comment, setComment] = useState('');
 	const [idx, setIdx] = useState(0);
@@ -14,19 +24,17 @@ const Feed = () => {
 		setComment(e.target.value);
 	};
 	const nextBtn = () => {
-		if (index === 1) return;
-		index += 1;
-		setIdx(index);
-		carouselRef.current.style.transform = `translate3d(-${
-			612 * index
-		}px, 0, 0)`;
+		if (idx === pictures - 1) return;
+		setIdx(idx + 1);
 	};
 	const prevBtn = () => {
-		if (index === 0) return;
-		index -= 1;
-		setIdx(index);
-		carouselRef.current.style.transform = `translate3d(${612 * index}px, 0, 0)`;
+		if (idx === 0) return;
+		setIdx(idx - 1);
 	};
+	useEffect(() => {
+		carouselRef.current.style.transform = `translateX(-${idx}00%)`;
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [idx]);
 	return (
 		<div className={styles.container}>
 			<div className={styles.box}>
@@ -38,7 +46,7 @@ const Feed = () => {
 					/>
 				</button>
 				<div className={styles.user}>
-					<div className={styles.user_name}>dongeenius</div>
+					<div className={styles.user_name}>{nickname}</div>
 					<div className={styles.user_info}>Gangneung</div>
 				</div>
 				<button type='button' className={styles.circle}>
@@ -69,16 +77,10 @@ const Feed = () => {
 					)}
 					<div className={styles.carousel_wrapper}>
 						<div ref={carouselRef} className={styles.carousel}>
-							<img
-								className={styles.feed_image}
-								alt='user'
-								src='/pictures/cruise.jpg'
-							/>
-							<img
-								className={styles.feed_image}
-								alt='user'
-								src='/pictures/clouds.jpg'
-							/>
+							{imgArr &&
+								imgArr.map((img) => (
+									<img className={styles.feed_image} alt='user' src={img} />
+								))}
 						</div>
 					</div>
 				</div>
@@ -99,7 +101,7 @@ const Feed = () => {
 					<div className={styles.column_3}>
 						<div className={styles.dot_container}>
 							{arr.map((num) => (
-								<BlueDot idx={num} index={index} />
+								<BlueDot idx={num} index={idx} />
 							))}
 						</div>
 					</div>
@@ -110,8 +112,8 @@ const Feed = () => {
 				<div className={styles.comment}>
 					<div className={styles.like}>좋아요 818개</div>
 					<div className={styles.comment_info}>
-						<span className={styles.name}>donggenius</span>
-						<span className={styles.content}>전화받았어요</span>
+						<span className={styles.name}>{nickname}</span>
+						<span className={styles.content}>{text}</span>
 					</div>
 					<div className={styles.comment_more}>댓글 10개 모두 보기</div>
 					<div className={styles.comment_add}>
@@ -124,7 +126,7 @@ const Feed = () => {
 						</div>
 					</div>
 				</div>
-				<div className={styles.date}>4일 전</div>
+				<div className={styles.date}>{date(time)}</div>
 			</section>
 			<div className={styles.line} />
 			<form className={styles.comment_form}>

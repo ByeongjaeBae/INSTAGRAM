@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import UserList from '../UserList/UserList';
 import styles from './UserBar.module.css';
 
-const UserBar = ({ size, nickname }) => {
+const UserBar = ({ size, nickname, username }) => {
 	const userRef = useRef(document.getElementsByClassName('userbar'));
 	return (
 		<div
@@ -17,7 +17,7 @@ const UserBar = ({ size, nickname }) => {
 				</div>
 				<div className={styles.User_info}>
 					<div className={styles.user_name}>{nickname}</div>
-					<div className={styles.name}>배병재</div>
+					<div className={styles.name}>{username}</div>
 				</div>
 				<div className={styles.User_tmi}>전환</div>
 			</div>
@@ -53,8 +53,14 @@ const UserBar = ({ size, nickname }) => {
 };
 
 UserBar.propTypes = {
-	size: PropTypes.number.isRequired,
-	nickname: PropTypes.string.isRequired,
+	size: PropTypes.number,
+	nickname: PropTypes.string,
+	username: PropTypes.string,
+};
+UserBar.defaultProps = {
+	size: null,
+	nickname: null,
+	username: null,
 };
 
 export default UserBar;

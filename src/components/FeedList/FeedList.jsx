@@ -4,32 +4,36 @@ import Feed from '../Feed/Feed';
 import styles from './FeedList.module.css';
 import firebaseApp from '../../service/firebase';
 
-const FeedList = ({ userId }) => {
+const FeedList = ({ userId, nickname }) => {
 	const [post, setPost] = useState({});
 	useEffect(() => {
 		if (!userId) return;
-		const ref = firebaseApp.database().ref(`/post/${userId}`);
+		const ref = firebaseApp.database().ref(`/post/${nickname}`);
 		ref.on('value', (snapshot) => {
 			const data = snapshot.val();
 			setPost(data);
 		});
-	}, [userId]);
+	}, [nickname, userId]);
 	return (
 		<div className={styles.container}>
 			{post &&
-				Object.keys(post).map((key) => {
-					const value = post[key];
-					return <Feed key={value.time} data={value} />;
-				})}
+				Object.keys(post)
+					.reverse()
+					.map((key) => {
+						const value = post[key];
+						return <Feed userId={userId} key={value.time} data={value} />;
+					})}
 		</div>
 	);
 };
 
 FeedList.propTypes = {
 	userId: PropTypes.string,
+	nickname: PropTypes.string,
 };
 FeedList.defaultProps = {
 	userId: null,
+	nickname: null,
 };
 
 export default FeedList;

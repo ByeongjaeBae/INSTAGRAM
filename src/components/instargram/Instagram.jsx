@@ -81,7 +81,7 @@ const Instagram = () => {
 						{!loading && (
 							<div className={styles.feedContainer}>
 								<RecommendBar />
-								<FeedList userId={userId} />
+								<FeedList nickname={nickname} userId={userId} />
 							</div>
 						)}
 						<div className={styles.UserBarContainer}>

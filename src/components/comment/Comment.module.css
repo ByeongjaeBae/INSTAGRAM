@@ -1,0 +1,22 @@
+.comment_info {
+	margin-bottom: 5px;
+}
+.name {
+	font-weight: 600;
+	margin-right: 5px;
+}
+.comment_add {
+	display: flex;
+	justify-content: space-between;
+}
+.nonVisible {
+	display: none;
+}
+.comment_icon {
+	display: flex;
+	margin-right: 15px;
+	align-items: center;
+}
+.time {
+	margin-right: 15px;
+}

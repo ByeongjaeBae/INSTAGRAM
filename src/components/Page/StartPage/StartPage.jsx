@@ -36,6 +36,7 @@ const StartPage = () => {
 		else checkNum = num + 3;
 		setToggle({ ...toggle, [num]: true, [checkNum]: true });
 	}, []);
+
 	useEffect(() => {
 		let num = 0;
 		if (num > 3) num = 1;

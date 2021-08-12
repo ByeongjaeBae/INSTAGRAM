@@ -157,13 +157,13 @@
 .comment_more {
 	opacity: 0.5;
 	margin-bottom: 3px;
+	background-color: inherit;
+	border: none;
+	cursor: pointer;
 }
 .comment_add {
 	display: flex;
-	justify-content: space-between;
-}
-.comment_icon {
-	margin-right: 15px;
+	flex-direction: column;
 }
 .date {
 	font-size: 10px;
@@ -217,4 +217,5 @@
 	font-size: 14px;
 	font-weight: 600;
 	margin-right: 15px;
+	cursor: pointer;
 }

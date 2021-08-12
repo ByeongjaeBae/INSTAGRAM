@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import React, { memo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import UserList from '../UserList/UserList';
 import styles from './UserBar.module.css';
 
-const UserBar = ({ size, nickname, username }) => {
+const UserBar = memo(({ size, nickname, username }) => {
 	const userRef = useRef(document.getElementsByClassName('userbar'));
 	return (
 		<div
@@ -50,7 +50,7 @@ const UserBar = ({ size, nickname, username }) => {
 			</div>
 		</div>
 	);
-};
+});
 
 UserBar.propTypes = {
 	size: PropTypes.number,

@@ -11,6 +11,7 @@ import {
 	initializeForm,
 	login,
 } from '../../modules/auth';
+import authService from '../../service/auth';
 
 const Login = ({ history }) => {
 	const [error, setError] = useState(null);
@@ -49,6 +50,13 @@ const Login = ({ history }) => {
 			history.push('/instagram');
 		}
 	}, [auth, authError, dispatch, history]);
+	useEffect(() => {
+		authService.onAuthChange((user) => {
+			if (user) {
+				history.push('/instagram');
+			}
+		});
+	}, []);
 	return (
 		<LoginForm
 			error={error}

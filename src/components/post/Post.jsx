@@ -65,7 +65,7 @@ const Post = ({ nickname, userId, onPost, onMenu }) => {
 			imgArr = [...imgArr, ...files];
 			data = { ...data, imgArr };
 		});
-		await firebaseApp.database().ref(`post/${userId}/${time}`).set(data);
+		await firebaseApp.database().ref(`post/${nickname}/${time}`).set(data);
 	};
 	const onBtn = () => {
 		onMenu();

@@ -72,6 +72,13 @@ const Register = ({ history }) => {
 			history.push('/instagram');
 		}
 	}, [auth, authError, dispatch, history]);
+	useEffect(() => {
+		authService.onAuthChange((user) => {
+			if (user) {
+				history.push('/instagram');
+			}
+		});
+	}, []);
 
 	return (
 		<RegisterForm

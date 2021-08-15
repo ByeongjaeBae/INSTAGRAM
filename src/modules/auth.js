@@ -20,10 +20,7 @@ const RegisterCheck = async (user) =>
 			};
 			if (promise) {
 				await firebaseApp.database().ref(`userId/${promise.uid}`).set(data);
-				await firebaseApp
-					.database()
-					.ref(`nickname/${data.nickname}`)
-					.set(data.nickname);
+				await firebaseApp.database().ref(`nickname/${data.nickname}`).set(data);
 				resolve(REGISTER_SUCCESS);
 			}
 		} catch (e) {
@@ -80,13 +77,13 @@ export const register = () =>
 		}
 	};
 
-export const login = () =>
+export const logins = () =>
 	async function Fn(dispatch, getState) {
 		try {
 			const data = { ...getState().Auth.login };
 			const user = await LoginCheck(data);
 			return dispatch({
-				typeL: LOGIN_SUCCESS,
+				type: LOGIN_SUCCESS,
 				user,
 				auth: true,
 			});
@@ -169,7 +166,7 @@ function Auth(state = initialState, action) {
 		case INITIALIZE_FORM: {
 			return {
 				...state,
-				[data.form]: initialState[data.form],
+				[data]: { ...initialState[data] },
 				auth: null,
 				authError: null,
 			};

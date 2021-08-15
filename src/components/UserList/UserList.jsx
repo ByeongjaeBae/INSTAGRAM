@@ -1,69 +1,36 @@
-import React from 'react';
+/* eslint-disable no-unused-expressions */
+/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from 'react';
+import firebaseApp from '../../service/firebase';
+import User from './User';
 import styles from './UserList.module.css';
 
-const UserList = () => (
-  <div className={styles.container}>
-    <div className={styles.user}>
-      <div className={`${styles.imgContainer} followed`}>
-        <img className={styles.img} src="./pictures/clouds.jpg" alt="pic" />
-      </div>
-      <div className={styles.info_container}>
-        <div className={styles.username}>hash_sihwan</div>
-        <div className={styles.info}>회원님을 팔로우합니다</div>
-      </div>
-      <div className={styles.follow}>팔로우</div>
-    </div>
-    <div className={styles.user}>
-      <div className={styles.imgContainer}>
-        <img className={styles.img} src="./pictures/clouds.jpg" alt="pic" />
-      </div>
-      <div className={styles.info_container}>
-        <div className={styles.username}>hash_sihwan</div>
-        <div className={styles.info}>회원님을 팔로우합니다</div>
-      </div>
-      <div className={styles.follow}>팔로우</div>
-    </div>
-    <div className={styles.user}>
-      <div className={styles.imgContainer}>
-        <img className={styles.img} src="./pictures/clouds.jpg" alt="pic" />
-      </div>
-      <div className={styles.info_container}>
-        <div className={styles.username}>hash_sihwan</div>
-        <div className={styles.info}>회원님을 팔로우합니다</div>
-      </div>
-      <div className={styles.follow}>팔로우</div>
-    </div>
-    <div className={styles.user}>
-      <div className={styles.imgContainer}>
-        <img className={styles.img} src="./pictures/clouds.jpg" alt="pic" />
-      </div>
-      <div className={styles.info_container}>
-        <div className={styles.username}>hash_sihwan</div>
-        <div className={styles.info}>회원님을 팔로우합니다</div>
-      </div>
-      <div className={styles.follow}>팔로우</div>
-    </div>
-    <div className={styles.user}>
-      <div className={styles.imgContainer}>
-        <img className={styles.img} src="./pictures/clouds.jpg" alt="pic" />
-      </div>
-      <div className={styles.info_container}>
-        <div className={styles.username}>hash_sihwan</div>
-        <div className={styles.info}>회원님을 팔로우합니다</div>
-      </div>
-      <div className={styles.follow}>팔로우</div>
-    </div>
-    <div className={styles.user}>
-      <div className={styles.imgContainer}>
-        <img className={styles.img} src="./pictures/clouds.jpg" alt="pic" />
-      </div>
-      <div className={styles.info_container}>
-        <div className={styles.username}>hash_sihwan</div>
-        <div className={styles.info}>회원님을 팔로우합니다</div>
-      </div>
-      <div className={styles.follow}>팔로우</div>
-    </div>
-  </div>
-);
+const UserList = ({ nickname }) => {
+	const [names, setNames] = useState([]);
+	const [follow, setFollow] = useState(true);
+	useEffect(() => {
+		firebaseApp
+			.database()
+			.ref(`/follow/${nickname}`)
+			.on('value', (snapshot) => {
+				const data = snapshot.val();
+				data && setNames([...data]);
+				!data && setNames(null);
+			});
+	}, [nickname, follow]);
+	return (
+		<div className={styles.container}>
+			{names &&
+				names.map((name) => (
+					<User
+						follow={follow}
+						setFollow={setFollow}
+						myname={nickname}
+						name={name}
+					/>
+				))}
+		</div>
+	);
+};
 
 export default UserList;

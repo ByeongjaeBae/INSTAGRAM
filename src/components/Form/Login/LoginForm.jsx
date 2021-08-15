@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styles from './LoginForm.module.css';
 
 const LoginForm = (props) => {
-	const { error, form, onLogin, onSubmit, onChange } = props;
+	const { emailRef, passwordRef, error, form, onLogin, onSubmit, onChange } =
+		props;
 	return (
 		<section className={styles.section}>
 			<article className={styles.article}>
@@ -12,6 +14,7 @@ const LoginForm = (props) => {
 					<form onSubmit={onSubmit} className={styles.form}>
 						<h1 className={styles.font}>Instagram</h1>
 						<input
+							ref={emailRef}
 							onChange={onChange}
 							name='email'
 							className={styles.input}
@@ -20,6 +23,7 @@ const LoginForm = (props) => {
 							value={form.email}
 						/>
 						<input
+							ref={passwordRef}
 							onChange={onChange}
 							className={styles.input}
 							name='password'

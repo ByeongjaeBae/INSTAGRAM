@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -5,7 +6,7 @@ import mine from 'mime-types';
 import styles from './Post.module.css';
 import firebaseApp from '../../service/firebase';
 
-const Post = ({ nickname, userId, onPost, onMenu }) => {
+const Post = ({ fix, nickname, userId, onPost, onMenu }) => {
 	const inputRef = useRef();
 	const [imgUrl, setImgUrl] = useState([]);
 	const [imgFile, setImgFile] = useState([]);
@@ -44,7 +45,9 @@ const Post = ({ nickname, userId, onPost, onMenu }) => {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		onPost();
-		const time = Date.now();
+		let time;
+		!fix && (time = Date.now());
+		fix && (time = fix);
 		let imgArr = [];
 		let data = {
 			userId,
@@ -53,6 +56,7 @@ const Post = ({ nickname, userId, onPost, onMenu }) => {
 			nickname,
 			text,
 			imgArr,
+			like: ['arr'],
 		};
 		const promises = imgFile.map((img, idx) =>
 			asyncUpload(`user/${userId}/${time}/${idx}`, img, idx),
@@ -122,10 +126,13 @@ const Post = ({ nickname, userId, onPost, onMenu }) => {
 };
 
 Post.propTypes = {
+	fix: PropTypes.number,
 	userId: PropTypes.string.isRequired,
 	nickname: PropTypes.string.isRequired,
 	onPost: PropTypes.func.isRequired,
 	onMenu: PropTypes.func.isRequired,
 };
-
+Post.defaultProps = {
+	fix: null,
+};
 export default Post;

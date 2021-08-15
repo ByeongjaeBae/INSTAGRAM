@@ -14,9 +14,6 @@
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	border-radius: 5px;
 }
-.none {
-	display: none;
-}
 
 .user {
 	background-color: white;
@@ -35,6 +32,7 @@
 	width: 56px;
 	height: 56px;
 	border-radius: 50%;
+	cursor: pointer;
 }
 .user_name {
 	margin-top: 3px;

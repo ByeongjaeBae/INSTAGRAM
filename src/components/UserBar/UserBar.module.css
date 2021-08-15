@@ -7,12 +7,16 @@
 		Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .User_box {
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 15px;
 }
 .User_icon {
+	background-color: inherit;
+	border: none;
+	cursor: pointer;
 	padding-right: 18px;
 }
 .User_icon img {
@@ -21,7 +25,8 @@
 	height: 56px;
 }
 .User_info {
-	width: 70%;
+	flex: 1 1 0;
+	width: 90%;
 }
 .user_name {
 	font-weight: 600;

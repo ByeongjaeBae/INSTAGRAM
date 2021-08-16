@@ -119,6 +119,7 @@ const Instagram = () => {
 							<div className={styles.feedContainer}>
 								<RecommendBar nickname={nickname} />
 								<FeedList
+									handleUserImage={handleUserImage}
 									follow={follow}
 									onPost={onPost}
 									nickname={nickname}

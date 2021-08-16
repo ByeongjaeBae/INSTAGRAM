@@ -9,7 +9,14 @@ import Comment from '../comment/Comment';
 
 import styles from './Feed.module.css';
 
-const Feed = ({ myname, onPost, profileId, loading, data }) => {
+const Feed = ({
+	handleUserImage,
+	myname,
+	onPost,
+	profileId,
+	loading,
+	data,
+}) => {
 	const { imgArr, nickname, text, time, like, userId } = data;
 	const pictures = imgArr.length;
 	const imgUrl = '/pictures/User.jpg';
@@ -23,6 +30,10 @@ const Feed = ({ myname, onPost, profileId, loading, data }) => {
 	const [idx, setIdx] = useState(0);
 	const [dot, setDot] = useState(false);
 	const carouselRef = useRef(null);
+
+	const checkHandleImage = () => {
+		if (myname === nickname) handleUserImage();
+	};
 	const onChange = (e) => {
 		setComment(e.target.value);
 	};
@@ -123,7 +134,11 @@ const Feed = ({ myname, onPost, profileId, loading, data }) => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.box}>
-				<button type='button' className={`${styles.img_box} followed`}>
+				<button
+					onClick={checkHandleImage}
+					type='button'
+					className={`${styles.img_box} followed`}
+				>
 					<img className={styles.user_img} alt='user' src={profile || imgUrl} />
 				</button>
 				<div className={styles.user}>

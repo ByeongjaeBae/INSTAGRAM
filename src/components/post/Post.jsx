@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 import React, { useRef, useState } from 'react';
+import imageCompression from 'browser-image-compression';
 import PropTypes from 'prop-types';
 import mine from 'mime-types';
 import styles from './Post.module.css';
@@ -17,6 +18,9 @@ const Post = ({ fix, nickname, userId, onPost, onMenu }) => {
 	const onClick = (e) => {
 		e.preventDefault();
 		inputRef.current.click();
+	};
+	const onBtn = () => {
+		onMenu();
 	};
 	function asyncUpload(url, img, idx) {
 		return new Promise((resolve, reject) => {
@@ -41,6 +45,27 @@ const Post = ({ fix, nickname, userId, onPost, onMenu }) => {
 				})
 				.catch((e) => reject(e));
 		});
+	}
+	function imageResizing(fileArr) {
+		const options = {
+			maxSizeKB: 100,
+			maxWidthOrHeight: 615,
+		};
+		const newFileArr = [];
+		const newFileUrl = [];
+		for (let i = 0; i < fileArr.length; i += 1) {
+			const file = fileArr[i];
+			let promise;
+			imageCompression(file, options).then((compressedFile) => {
+				newFileArr.push(compressedFile);
+				setImgFile([...newFileArr]);
+				promise = imageCompression.getDataUrlFromFile(compressedFile);
+				promise.then((result) => {
+					newFileUrl.push(result);
+					setImgUrl([...newFileUrl]);
+				});
+			});
+		}
 	}
 	const onSubmit = async (e) => {
 		e.preventDefault();
@@ -71,25 +96,13 @@ const Post = ({ fix, nickname, userId, onPost, onMenu }) => {
 		});
 		await firebaseApp.database().ref(`post/${nickname}/${time}`).set(data);
 	};
-	const onBtn = () => {
-		onMenu();
-	};
 
-	const onChange = (e) => {
+	const onChange = async (e) => {
 		e.preventDefault();
 		const fileArr = e.target.files;
-		const fileURLs = [];
-		setImgFile([...fileArr]);
-		for (let i = 0; i < fileArr.length; i += 1) {
-			const file = fileArr[i];
-			const reader = new FileReader();
-			reader.onloadend = () => {
-				fileURLs[i] = reader.result;
-				setImgUrl([...fileURLs]);
-			};
-			if (file) reader.readAsDataURL(file);
-		}
+		imageResizing(fileArr);
 	};
+
 	return (
 		<form onSubmit={onSubmit} className={styles.form}>
 			<button className={styles.times} type='button' onClick={onPost}>

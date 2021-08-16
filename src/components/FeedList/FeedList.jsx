@@ -6,7 +6,7 @@ import Feed from '../Feed/Feed';
 import styles from './FeedList.module.css';
 import firebaseApp from '../../service/firebase';
 
-const FeedList = ({ onPost, userId, nickname, follow }) => {
+const FeedList = ({ handleUserImage, onPost, userId, nickname, follow }) => {
 	const [post, setPost] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [profileId, setProfileId] = useState(null);
@@ -53,6 +53,7 @@ const FeedList = ({ onPost, userId, nickname, follow }) => {
 							const value = post[key];
 							return (
 								<Feed
+									handleUserImage={handleUserImage}
 									myname={nickname}
 									onPost={onPost}
 									profileId={profileId}
@@ -70,6 +71,7 @@ const FeedList = ({ onPost, userId, nickname, follow }) => {
 
 FeedList.propTypes = {
 	onPost: PropTypes.func.isRequired,
+	handleUserImage: PropTypes.func.isRequired,
 	userId: PropTypes.string,
 	nickname: PropTypes.string,
 	follow: PropTypes.bool.isRequired,

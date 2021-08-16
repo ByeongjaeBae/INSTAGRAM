@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useRef } from 'react';
+import imageCompression from 'browser-image-compression';
 import firebaseApp from '../../service/firebase';
 import styles from './UserImage.module.css';
 
@@ -7,15 +8,25 @@ const UserImage = ({ handleUserImage, nickname }) => {
 	const [img, setImg] = useState(null);
 	const [imgUrl, setImgUrl] = useState(null);
 	const inputRef = useRef(null);
-	const onChange = (e) => {
+	const onChange = async (e) => {
 		e.preventDefault();
 		const file = e.target.files[0];
-		setImg(file);
-		const reader = new FileReader();
-		reader.onloadend = () => {
-			setImgUrl(reader.result);
+		const options = {
+			maxSizeKB: 100,
+			maxWidthOrHeight: 60,
 		};
-		reader.readAsDataURL(file);
+		try {
+			const compressedFile = await imageCompression(file, options);
+			setImg(compressedFile);
+
+			// resize된 이미지의 url을 받아 fileUrl에 저장
+			const promise = imageCompression.getDataUrlFromFile(compressedFile);
+			promise.then((result) => {
+				setImgUrl(result);
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	const onClick = (e) => {
 		e.preventDefault();

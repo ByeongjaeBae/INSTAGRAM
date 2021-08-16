@@ -34,7 +34,8 @@ const FeedList = ({ onPost, userId, nickname, follow }) => {
 							if (arr.includes(name)) {
 								Object.keys(data[name]).forEach((value) => {
 									postArr.push(data[name][value]);
-									setPost([...postArr].sort((a, b) => b.time - a.time));
+									postArr.sort((a, b) => a.time - b.time);
+									setPost([...postArr]);
 								});
 							}
 						});

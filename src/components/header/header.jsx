@@ -10,6 +10,7 @@ const Header = memo(
 		const inputRef = useRef();
 		const following = '팔로우';
 		const unfollowing = '언팔로우';
+		const imgUrl = '/pictures/User.jpg';
 		const [toggle, setToggle] = useState(false);
 		const [name, setName] = useState('');
 		const [nickname, setNickname] = useState('');
@@ -105,7 +106,7 @@ const Header = memo(
 								<div className={styles.image}>
 									<img
 										className={styles.userImage}
-										src={userImage}
+										src={userImage || imgUrl}
 										alt='user'
 									/>
 								</div>

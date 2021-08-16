@@ -257,7 +257,11 @@ const Feed = ({ myname, onPost, profileId, loading, data }) => {
 					autoCorrect='off'
 					placeholder='댓글 달기...'
 				/>
-				<button onClick={onClick} className={styles.comment_btn} type='submit'>
+				<button
+					onClick={onClick}
+					className={`${styles.comment_btn} ${comment ? styles.Active : ''}`}
+					type='submit'
+				>
 					게시
 				</button>
 			</form>

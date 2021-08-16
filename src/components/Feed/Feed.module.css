@@ -127,15 +127,13 @@
 	justify-content: space-between;
 }
 .column_1 {
+	width: 110px;
 	display: flex;
 }
 .column_2 {
-	margin-right: 15px;
-}
-.column_3 {
-	position: absolute;
-	left: 280px;
-	top: 5px;
+	width: 110px;
+	display: flex;
+	justify-content: flex-end;
 }
 .dot_container {
 	display: flex;
@@ -228,6 +226,9 @@
 	font-weight: 600;
 	margin-right: 15px;
 	cursor: pointer;
+}
+.Active {
+	color: rgb(11, 158, 255);
 }
 .loading {
 	width: 100%;
